@@ -185,8 +185,9 @@ impl<'a> Span<'a> {
     fn split_at_in_place(&mut self, mid: usize) -> Span<'a> {
         let content = match self.content {
             Cow::Owned(ref mut s) => {
-                let s2 = s[mid..].to_string();
-                s.truncate(mid);
+                let start = s.char_indices().map(|(i, _)| i).nth(mid).unwrap();
+                let s2 = s[start..].to_string();
+                s.truncate(start);
                 Cow::Owned(s2)
             }
             Cow::Borrowed(s) => {
