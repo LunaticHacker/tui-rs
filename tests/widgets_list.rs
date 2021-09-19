@@ -2,6 +2,7 @@ use tui::{
     backend::TestBackend,
     buffer::Buffer,
     layout::Rect,
+    text::Spans,
     style::{Color, Style},
     symbols,
     widgets::{Block, Borders, List, ListItem, ListState},
