@@ -482,6 +482,7 @@ pub struct WrappedText<'a> {
     column: u16,
     last_word_end: u16,
     was_whitespace: bool,
+    was_linebreak:bool,
 }
 
 impl<'a> WrappedText<'a> {
@@ -493,6 +494,7 @@ impl<'a> WrappedText<'a> {
             column: 0,
             last_word_end: 0,
             was_whitespace: false,
+            was_linebreak:false,
         }
     }
 
@@ -528,10 +530,11 @@ impl<'a> WrappedText<'a> {
                 if grapheme_width > self.width {
                     continue;
                 }
-                if grapheme =="\n"
+                if !self.was_linebreak && grapheme =="\n"
                 {
                     let width = self.last_word_end.saturating_sub(span_position) as usize;
                     breakpoint = Some(width);
+                    self.was_linebreak =true;
                     break;
                 }
                 let is_whitespace = grapheme.chars().all(&char::is_whitespace);
