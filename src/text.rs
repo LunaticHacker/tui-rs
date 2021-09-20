@@ -528,6 +528,12 @@ impl<'a> WrappedText<'a> {
                 if grapheme_width > self.width {
                     continue;
                 }
+                if grapheme =="\n"
+                {
+                    let width = self.last_word_end.saturating_sub(span_position) as usize;
+                    breakpoint = Some(width);
+                    break;
+                }
                 let is_whitespace = grapheme.chars().all(&char::is_whitespace);
                 if  !self.was_whitespace && grapheme != NBSP {
                     self.last_word_end = self.column;
