@@ -533,7 +533,7 @@ impl<'a> WrappedText<'a> {
                 if !self.was_linebreak && grapheme =="\n"
                 {
                     let width = self.last_word_end.saturating_sub(span_position) as usize;
-                    breakpoint = Some(width);
+                    breakpoint = Some(width+1);
                     self.was_linebreak =true;
                     break;
                 }
