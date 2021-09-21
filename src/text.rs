@@ -569,6 +569,7 @@ impl<'a> WrappedText<'a> {
     fn start_new_line(&mut self) {
         self.column = 0;
         self.last_word_end = 0;
+        self.was_linebreak=false;
         self.text.lines.push(Spans::default());
     }
 }
