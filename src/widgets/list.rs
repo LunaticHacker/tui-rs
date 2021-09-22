@@ -239,7 +239,7 @@ impl<'a> StatefulWidget for List<'a> {
                 // if the item is selected, we need to display the hightlight symbol:
                 // - either for the first line of the item only,
                 // - or for each line of the item if the appropriate option is set
-                let symbol = if is_selected && (j == 0 || self.repeat_highlight_symbol){
+                let symbol = if is_selected && (j == 0 || self.repeat_highlight_symbol)&&j !=item.content.lines.len()-1{
                     highlight_symbol
                 } else {
                     &blank_symbol
